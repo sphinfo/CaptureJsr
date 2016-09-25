@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# CaptureJsr
-=======
 #Extent JSR
 
 ============================
@@ -9,4 +6,3 @@
  2. 레이어: useCanvas= false
  3. com.sph.Capture에서 html 생성 후 wkhtmltoimage을 사용하여 html을 이미지로 변경 
  4. Demo : http://61.32.6.18:18080/TestSuperMap/example.html 
->>>>>>> branch 'master' of https://github.com/sphinfo/CaptureJsr.git
