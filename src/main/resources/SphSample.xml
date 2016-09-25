@@ -1,0 +1,6 @@
+<resources>
+        <resource>
+            <configID>capture_jsr</configID>
+            <implementClass>com.sphinfo.sample.CaptureJsr</implementClass>
+        </resource>
+</resources>

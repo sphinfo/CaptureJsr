@@ -1,0 +1,8 @@
+<resources>
+        <resource>
+            <configID>capture</configID>
+            <urlTemplate>/maps/{mapName}/capture</urlTemplate>
+            <resourceType>ArithmeticResource</resourceType>
+            <implementClass>com.sphinfo.sample.Capture</implementClass>
+        </resource>
+</resources>
