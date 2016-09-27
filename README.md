@@ -1,4 +1,4 @@
-#iServer for JavaScript 예제
+#Extent JSR
 
 ============================
 ##capture/print  추가 
