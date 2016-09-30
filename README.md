@@ -21,27 +21,56 @@ html2canvas(mapElem, {
     mapImg = canvas.toDataURL('image/png');
         var jsonCanvasParameters = SuperMap.Util.toJSON({
             	"width" :size.w,
-         				"height" :size.h,
-					        "html" :"<img src='"+mapImg+"'/>"
-	    	  });
+                "height" :size.h,
+		"html" :"<img src='"+mapImg+"'/>"
+        });
         var capturUrl = host+"/services/spatialanalyst-sample/restjsr/"+type+".jsonp";
         var restService = new SuperMap.ServiceBase(capturUrl+"?returnContent=true");
         restService.isInTheSameDomain = false;
         var option = {
          	method : "POST",
-		        scope:this,
-		        data :jsonParameters,
-		        success :function(json){
-             var result = SuperMap.Util.transformResult(json);
-             var link = document.createElement('a');
-             link.download = 'Download.png';
-	 				       link.target= "_blank";
-             document.body.appendChild(link);
-             link.click();
-             link.remove();
-          }
+		scope:this,
+		data :jsonCanvasParameters,
+		success :function(json){
+		    var result = SuperMap.Util.transformResult(json);
+		    var link = document.createElement('a');
+		    link.download = 'Download.png';
+		    link.target= "_blank";
+		    document.body.appendChild(link);
+		    link.click();
+		    link.remove();
+		}
        }
        restService.request(option);
     }
 });
+```
+### CAPTURE : 레이어를 canvas 미사용시
+```javascript
+var host = "http://127.0.0.1:8090/iserver"; // 이미지를 다운 받을 iserver url
+var size = map.getCurrentSize();
+var mapViewPort = $("#map div:first-child");
+var jsonParameters = SuperMap.Util.toJSON({
+    "width" :size.w,
+    "height" :size.h,
+    "html" :"html" :mapViewPort.children().html()
+});
+var capturUrl = host+"/services/spatialanalyst-sample/restjsr/"+type+".jsonp";
+
+var restService = new SuperMap.ServiceBase(capturUrl+"?returnContent=true");
+restService.isInTheSameDomain = false;
+var option = {
+    method : "POST",
+    scope:this,
+    data :jsonParameters,
+    success :function(json){
+    	var result = SuperMap.Util.transformResult(json);
+	var link = document.createElement('a');
+	link.download = 'Download.png';
+	link.target= "_blank";
+	document.body.appendChild(link);
+	link.click();
+	link.remove();
+    }
+}
 ```
