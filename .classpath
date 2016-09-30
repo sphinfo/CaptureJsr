@@ -32,7 +32,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/_SuperMap/supermap_iserver_802_14029_64_win64_eng/lib/servlet-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libs"/>
-	<classpathentry kind="lib" path="D:/supermap/supermap_iserver_8.0.0a_win64_zip_eng/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

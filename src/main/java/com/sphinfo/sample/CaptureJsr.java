@@ -30,7 +30,6 @@ import com.supermap.services.rest.util.MappingUtil;
 public class CaptureJsr extends JaxAlgorithResultSetResource<JSONObject> {
 	private static Logger log = Logger.getLogger("CaptureJsr");
 
-	private static String outputPath = "D:/supermap/supermap_iserver_8.0.0a_win64_zip_eng/webapps/iserver/output/resources/";
 	@Override
 	protected String getAlgorithmName() {
 		// TODO Auto-generated method stub
@@ -45,15 +44,24 @@ public class CaptureJsr extends JaxAlgorithResultSetResource<JSONObject> {
 		Date date = new Date();
 		
 		String htmlNm = String.valueOf(date.getTime());
-		String defaultPath = outputPath+getAlgorithmName()+"/";
-		String htmlFileNm = defaultPath+ htmlNm + ".html";
+		String defaultPath = "";
+		String htmlFileNm = "";
 		String imageFileNm = defaultPath + htmlNm + ".png";
 		String resultCode = "500";
 		String imageUrl = "";
+		
 		try {
+			File defalutPath = new File("./..");
+			String outputPath  = defalutPath.getCanonicalPath()+"/webapps/iserver/output/resources/";
+			defaultPath = outputPath+getAlgorithmName()+"/";
+			
+			htmlFileNm = defaultPath+ htmlNm + ".html";
+			imageFileNm = defaultPath + htmlNm + ".png";
+			
 			File caturePath = new File(defaultPath);
-			File testPath = new File("../../");
-			log.info(testPath.getCanonicalPath().toString());
+			
+			log.info(defaultPath);
+			
 			if(!caturePath.exists()){
 				caturePath.mkdirs();
 			}
@@ -68,7 +76,7 @@ public class CaptureJsr extends JaxAlgorithResultSetResource<JSONObject> {
 			
 			resultCode = "200";
 			result.put("code",resultCode);
-			result.put("path",getAlgorithmName()+"/"+htmlNm+".png");
+			result.put("path","output/resources/"+getAlgorithmName()+"/"+htmlNm+".png");
 			Iterator<String> iterator =getCustomVariables().keySet().iterator();
 			while(iterator.hasNext()){
 				String key  = iterator.next();

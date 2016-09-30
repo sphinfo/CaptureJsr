@@ -3,4 +3,8 @@
             <configID>capture_jsr</configID>
             <implementClass>com.sphinfo.sample.CaptureJsr</implementClass>
         </resource>
+        <resource>
+            <configID>print_jsr</configID>
+            <implementClass>com.sphinfo.sample.PrintJsr</implementClass>
+        </resource>
 </resources>

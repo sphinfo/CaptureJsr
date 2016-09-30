@@ -45,30 +45,49 @@ public class PrintJsr extends JaxAlgorithResultSetResource<JSONObject> {
 		Date date = new Date();
 		
 		String htmlNm = String.valueOf(date.getTime());
-		String defaultPath = outputPath+getAlgorithmName()+"/";
-		String htmlFileNm = defaultPath+ htmlNm + ".html";
-		String imageFileNm = defaultPath + htmlNm + ".png";
+		String defaultPath = "";
+		
+		String htmlFileNm = "";
+		String htmlCaptureFileNm = "";
+		
+		String imageFileNm ="";
+		String imageCaptureNm="";
+		
 		String resultCode = "500";
-		String imageUrl = "";
+		
 		try {
-			File caturePath = new File(defaultPath);
-			File testPath = new File("../../");
-			log.info(testPath.toPath().toString());
-			if(!caturePath.exists()){
-				caturePath.mkdirs();
+			File defalutPath = new File("./..");
+			String outputPath  = defalutPath.getCanonicalPath()+"/webapps/iserver/output/resources/";
+			defaultPath = outputPath+getAlgorithmName()+"/";
+			
+			htmlFileNm = defaultPath+ htmlNm + ".html";
+			imageFileNm = defaultPath + htmlNm + ".pdf";
+			
+			htmlCaptureFileNm = outputPath+ htmlNm + ".html";
+			imageCaptureNm = outputPath + htmlNm + ".png";
+			
+			File printPath = new File(defaultPath);
+			
+			if(!printPath.exists()){
+				printPath.mkdirs();
 			}
-			//log.info(json.getString("html"));
+
 
 			String body = json.getString("html") == null ? "" : json.getString("html");
 			String width = json.getString("width") == null ? "" : json.getString("width");
 			String height = json.getString("height") == null ? "" : json.getString("height");
+			String pageSize = json.getString("pageSize") == null ? "" : json.getString("pageSize");
+			String orientation = json.getString("orientation") == null ? "" : json.getString("orientation");
 			
-			SphUtils.makeHtml(body, htmlFileNm);
-			SphUtils.runCapture(width, height, htmlFileNm, imageFileNm);
+			SphUtils.makeHtml(body, htmlCaptureFileNm);
+			SphUtils.runCapture(width, height, htmlCaptureFileNm, imageCaptureNm);
+			
+			SphUtils.makePdfHtml(htmlFileNm,imageCaptureNm, pageSize, orientation);
+			SphUtils.runPdf(pageSize, orientation, htmlFileNm, imageFileNm);
 			
 			resultCode = "200";
 			result.put("code",resultCode);
-			result.put("path",getAlgorithmName()+"/"+htmlNm+".png");
+			result.put("path","output/resources/"+getAlgorithmName()+"/"+htmlNm+".pdf");
 			Iterator<String> iterator =getCustomVariables().keySet().iterator();
 			while(iterator.hasNext()){
 				String key  = iterator.next();
@@ -81,13 +100,11 @@ public class PrintJsr extends JaxAlgorithResultSetResource<JSONObject> {
 			result.put("code",resultCode);
 			return result.toString();
 		} finally {
-			
-			File htmlFile = new File(htmlFileNm);
-			if(htmlFile.exists()){
-				htmlFile.delete();
-			}
+//			File htmlFile = new File(htmlFileNm);
+//			if(htmlFile.exists()){
+//				htmlFile.delete();
+//			}
 		}
-		
 	}
 
 }
