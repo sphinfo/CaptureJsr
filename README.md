@@ -43,3 +43,4 @@ html2canvas(mapElem, {
        restService.request(option);
     }
 });
+```
