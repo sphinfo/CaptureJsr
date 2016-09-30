@@ -9,7 +9,7 @@
 ## client 호출
 ### CAPTURE : 레이어를 canvas 사용시
  1. html2canvas.js 사용
- ```javascript
+```javascript
 var host = "http://127.0.0.1:8090/iserver"; // 이미지를 다운 받을 iserver url
 var size = map.getCurrentSize();
 var mapViewPort = $("#map div:first-child");
