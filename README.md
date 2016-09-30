@@ -6,6 +6,7 @@
  2. 레이어: useCanvas= false
  3. com.sph.Capture에서 html 생성 후 wkhtmltoimage을 사용하여 html을 이미지로 변경 
  4. Demo : http://61.32.6.18:18080/TestSuperMap/example.html 
+
 ## client 호출
 ### CAPTURE : 레이어를 canvas 사용시
  1. html2canvas.js 사용
