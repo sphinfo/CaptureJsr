@@ -77,11 +77,6 @@ public class CaptureJsr extends JaxAlgorithResultSetResource<JSONObject> {
 			resultCode = "200";
 			result.put("code",resultCode);
 			result.put("path","output/resources/"+getAlgorithmName()+"/"+htmlNm+".png");
-			Iterator<String> iterator =getCustomVariables().keySet().iterator();
-			while(iterator.hasNext()){
-				String key  = iterator.next();
-				log.info("GCV ==> "+ getCustomVariables().get(key));
-			}
 			return result.toString();
 		} catch (Exception ex) {
 			ex.printStackTrace();

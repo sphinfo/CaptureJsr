@@ -56,13 +56,14 @@ public class SphUtils {
 			html.append("<head><meta charset=\"EUC-KR\"/></head>\n");
 			html.append("<body>\n");
 			html.append("<img src='").append(catureImage).append("' ");
-			String pageSize = getSize(pdfSize) ;
+			int[] pageSize = getPageSize(pdfSize) ;
 			if(pdfOrientation.equals("Portrait")){
 				html.append("height='");
+				html.append(pageSize[1]).append("' />");
 			}else {
 				html.append("width='");
+				html.append(pageSize[0]).append("' />");
 			}
-			html.append(pageSize).append("' />");
 			// html.append("<div style='width:100%;height:100%;background-color:#FEF112;'/>\n");
 			html.append("\n</body>\n");
 			html.append("</html>");
@@ -155,14 +156,22 @@ public class SphUtils {
 			}
 		}
 	}
-	public static String getSize(String pageSize){
-		String size ="1024";
-		if(pageSize.equals("A4")){
-			size = "1024";
-		}else {
-			size = "2048";
-		}
-		return size;
+	/**
+	 * 프린트 페이지 사이즈 별 이미지 사이즈 px 변환
+	 * @param pageSize
+	 * @return
+	 */
+	public static int[] getPageSize(String pageSize){
+		double width = 21*40 ;
+		double height = 29.7*40  ;
 		
+		if(pageSize.equals("A3")){
+			width = 29.7*40;
+			height =  42*40;
+		} else if(pageSize.equals("A0")){
+			width = 84.1 * 40;
+			height =  118.9 * 40 ;
+		}
+		return new int[]{(int)width,(int)height};
 	}
 }
